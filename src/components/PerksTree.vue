@@ -1,20 +1,27 @@
 <template>
   <div id="app">
     {{ name }}
-    <Perk name="Perk1" :img-url="'https://image.shutterstock.com/image-vector/three-gear-sign-simple-icon-260nw-417078436.jpg'" max-value=2 />
+    <div v-for="(perk, idx) in perks" :key="idx">
+      <Perk
+        :name="perk.name"
+        :img-url="perk.imgUrl"
+        :max-value="perk.maxValue"
+      />
+    </div>
   </div>
 </template>
 
 <script>
-import Perk from './Perk.vue'
+import Perk from "./Perk.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    Perk
+    Perk,
   },
   props: {
-      name: String,
-  }
-}
+    name: String,
+    perks: Array,
+  },
+};
 </script>
