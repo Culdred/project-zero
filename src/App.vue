@@ -4,25 +4,27 @@
       Back
     </button>
     <div v-show="isVisible">
-      <Stat name="Int" :img-url="'https://image.shutterstock.com/image-vector/three-gear-sign-simple-icon-260nw-417078436.jpg'" max-value=20 />
+      <Perk name="Int" :img-url="'https://image.shutterstock.com/image-vector/three-gear-sign-simple-icon-260nw-417078436.jpg'" max-value=20 />
     </div>
     <button @click="isVisible = !isVisible; tree='Breach'" v-show="isVisible">Breach</button>
     <div v-if="tree === 'Breach'">
-      <Perk name="Perk1" :img-url="'https://image.shutterstock.com/image-vector/three-gear-sign-simple-icon-260nw-417078436.jpg'" max-value=2 />
+      <PerksTree :name='tree' />
     </div>
-    <br>
-    <button @click="isVisible = !isVisible" v-show="isVisible">Quickhacks</button>
+    <button @click="isVisible = !isVisible; tree='Quickhacks'" v-show="isVisible">Quickhacks</button>
+    <div v-if="tree === 'Quickhacks'">
+      <PerksTree :name='tree' />
+    </div>
   </div>
 </template>
 
 <script>
-import Stat from './components/Stat.vue'
+import PerksTree from './components/PerksTree.vue'
 import Perk from './components/Perk.vue'
 
 export default {
   name: 'App',
   components: {
-    Stat,
+    PerksTree,
     Perk,
   },
   data: function() {
