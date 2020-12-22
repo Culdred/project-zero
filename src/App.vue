@@ -1,94 +1,45 @@
 <template>
   <div id="app">
     <div v-show="isVisible">
-      
       <div v-for="(stat, idx) in statList" :key="idx">
-        <Perk :name="stat.name" :img-url="stat.img" max-value=20 />
+        <Perk :name="stat.name" :img-url="stat.img" max-value="20" />
+
         <div v-for="(perkTree, idx) in stat.perkTrees" :key="idx">
-          <button @click="isVisible = !isVisible; tree='perkTree'">{{ perkTree }}</button>
+          <button
+            @click="
+              isVisible = !isVisible;
+              tree = perkTree.name;
+              perks = perkTree.perks;
+            "
+          >
+            {{ perkTree.name }}
+          </button>
         </div>
       </div>
-
-      <!-- <Perk name="Body" :img-url="'https://cyberpunk2077.wiki.fextralife.com/file/Cyberpunk-2077/body-attribute-cyberpunk-2077-wiki-guide.png'" max-value=20 />
-      <button @click="isVisible = !isVisible; tree='Athletics'">Athletics</button>
-      <button @click="isVisible = !isVisible; tree='Annihilation'">Annihilation</button>
-      <button @click="isVisible = !isVisible; tree='Street Brawler'">Street Brawler</button>
-
-      <Perk name="Reflexes" :img-url="'https://cyberpunk2077.wiki.fextralife.com/file/Cyberpunk-2077/reflexes-attribute-cyberpunk-2077-wiki-guide.png'" max-value=20 />
-      <button @click="isVisible = !isVisible; tree='Blades'">Blades</button>
-      <button @click="isVisible = !isVisible; tree='Handguns'">Handguns</button>
-      <button @click="isVisible = !isVisible; tree='Assault'">Assault</button>
-
-      <Perk name="Technical Ability" :img-url="'https://cyberpunk2077.wiki.fextralife.com/file/Cyberpunk-2077/technical-ability-attribute-cyberpunk-2077-wiki-guide.png'" max-value=20 />
-      <button @click="isVisible = !isVisible; tree='Crafting'">Crafting</button>
-      <button @click="isVisible = !isVisible; tree='Engineering'">Engineering</button>
-
-      <Perk name="Intelligence" :img-url="'https://cyberpunk2077.wiki.fextralife.com/file/Cyberpunk-2077/intelligence-attribute-cyberpunk-2077-wiki-guide.png'" max-value=20 />
-      <button @click="isVisible = !isVisible; tree='Breach'">Breach</button>
-      <button @click="isVisible = !isVisible; tree='Quickhacks'">Quickhacks</button>
-      
-      <Perk name="Cool" :img-url="'https://cyberpunk2077.wiki.fextralife.com/file/Cyberpunk-2077/cool-attribute-cyberpunk-2077-wiki-guide.png'" max-value=20 />
-      <button @click="isVisible = !isVisible; tree='Stealth'">Stealth</button>
-      <button @click="isVisible = !isVisible; tree='Cold Blood'">Cold Blood</button> -->
-
     </div>
 
-    <div v-for="(perkTree, idx) in perkTreeList" :key="idx">
-      <div v-if="tree === perkTree">
-        <PerksTree :name='perkTree' />
-      </div>
+    <div v-show="!isVisible">
+      <PerksTree :name="tree" :perks="perks" />
     </div>
 
-    <!-- <div v-if="tree === 'Athletics'">
-        <PerksTree :name='tree' />
-    </div>
-    <div v-if="tree === 'Annihilation'">
-      <PerksTree :name='tree' />
-    </div>
-    <div v-if="tree === 'Street Brawler'">
-      <PerksTree :name='tree' />
-    </div>
-    <div v-if="tree === 'Blades'">
-      <PerksTree :name='tree' />
-    </div>
-    <div v-if="tree === 'Handguns'">
-      <PerksTree :name='tree' />
-    </div>
-    <div v-if="tree === 'Assault'">
-      <PerksTree :name='tree' />
-    </div>
-    <div v-if="tree === 'Crafting'">
-      <PerksTree :name='tree' />
-    </div>
-    <div v-if="tree === 'Engineering'">
-      <PerksTree :name='tree' />
-    </div>
-    <div v-if="tree === 'Breach'">
-      <PerksTree :name='tree' />
-    </div>
-    <div v-if="tree === 'Quickhacks'">
-      <PerksTree :name='tree' />
-    </div>
-    <div v-if="tree === 'Stealth'">
-      <PerksTree :name='tree' />
-    </div>
-    <div v-if="tree === 'Cold Blood'">
-      <PerksTree :name='tree' />
-    </div> -->
-
-    <button v-show="!isVisible" @click="isVisible = !isVisible; tree=''">
+    <button
+      v-show="!isVisible"
+      @click="
+        isVisible = !isVisible;
+        tree = '';
+      "
+    >
       Back
     </button>
-
   </div>
 </template>
 
 <script>
-import PerksTree from './components/PerksTree.vue'
-import Perk from './components/Perk.vue'
+import PerksTree from "./components/PerksTree.vue";
+import Perk from "./components/Perk.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
     PerksTree,
     Perk,
@@ -97,67 +48,228 @@ export default {
     return {
       isVisible: true,
       tree: "",
-      perkTreeList: [
-        "Athletics",
-        "Annihilation",
-        "Street Brawler",
-        "Blades",
-        "Handguns",
-        "Assault",
-        "Crafting",
-        "Engineering",
-        "Breach",
-        "Quickhacks",
-        "Stealth",
-        "Cold Blood"
-        ],
+      perks: [],
       statList: [
         {
           name: "Body",
-          img: "https://cyberpunk2077.wiki.fextralife.com/file/Cyberpunk-2077/body-attribute-cyberpunk-2077-wiki-guide.png",
+          img:
+            "https://cyberpunk2077.wiki.fextralife.com/file/Cyberpunk-2077/body-attribute-cyberpunk-2077-wiki-guide.png",
           perkTrees: [
-            "Athletics",
-            "Annihilation",
-            "Street Brawler",
-          ]
+            {
+              name: "Athletics",
+              perks: [
+                {
+                  name: "perk1",
+                  imgUrl:
+                    "https://image.shutterstock.com/image-vector/three-gear-sign-simple-icon-260nw-417078436.jpg",
+                  maxValue: 2,
+                },
+                {
+                  name: "perk2",
+                  imgUrl: "",
+                  maxValue: 3,
+                },
+              ],
+            },
+            {
+              name: "Annihilation",
+              perks: [
+                {
+                  name: "perk1",
+                  imgUrl: "",
+                  maxValue: 2,
+                },
+                {
+                  name: "perk2",
+                  imgUrl: "",
+                  maxValue: 2,
+                },
+              ],
+            },
+            {
+              name: "Street Brawler",
+              perks: [
+                {
+                  name: "perk1",
+                  imgUrl: "",
+                  maxValue: 2,
+                },
+                {
+                  name: "perk2",
+                  imgUrl: "",
+                  maxValue: 2,
+                },
+              ],
+            },
+          ],
         },
         {
           name: "Reflexes",
-          img: "https://cyberpunk2077.wiki.fextralife.com/file/Cyberpunk-2077/reflexes-attribute-cyberpunk-2077-wiki-guide.png",
+          img:
+            "https://cyberpunk2077.wiki.fextralife.com/file/Cyberpunk-2077/reflexes-attribute-cyberpunk-2077-wiki-guide.png",
           perkTrees: [
-            "Blades",
-            "Handguns",
-            "Assault",
-          ]
+            {
+              name: "Blades",
+              perks: [
+                {
+                  name: "perk1",
+                  imgUrl: "",
+                  maxValue: 2,
+                },
+                {
+                  name: "perk2",
+                  imgUrl: "",
+                  maxValue: 2,
+                },
+              ],
+            },
+            {
+              name: "Handguns",
+              perks: [
+                {
+                  name: "perk1",
+                  imgUrl: "",
+                  maxValue: 2,
+                },
+                {
+                  name: "perk2",
+                  imgUrl: "",
+                  maxValue: 2,
+                },
+              ],
+            },
+            {
+              name: "Assault",
+              perks: [
+                {
+                  name: "perk1",
+                  imgUrl: "",
+                  maxValue: 2,
+                },
+                {
+                  name: "perk2",
+                  imgUrl: "",
+                  maxValue: 2,
+                },
+              ],
+            },
+          ],
         },
         {
           name: "Technical Ability",
-          img: "https://cyberpunk2077.wiki.fextralife.com/file/Cyberpunk-2077/technical-ability-attribute-cyberpunk-2077-wiki-guide.png",
+          img:
+            "https://cyberpunk2077.wiki.fextralife.com/file/Cyberpunk-2077/technical-ability-attribute-cyberpunk-2077-wiki-guide.png",
           perkTrees: [
-            "Crafting",
-            "Engineering",
-          ]
+            {
+              name: "Crafting",
+              perks: [
+                {
+                  name: "perk1",
+                  imgUrl: "",
+                  maxValue: 2,
+                },
+                {
+                  name: "perk2",
+                  imgUrl: "",
+                  maxValue: 2,
+                },
+              ],
+            },
+            {
+              name: "Engineering",
+              perks: [
+                {
+                  name: "perk1",
+                  imgUrl: "",
+                  maxValue: 2,
+                },
+                {
+                  name: "perk2",
+                  imgUrl: "",
+                  maxValue: 2,
+                },
+              ],
+            },
+          ],
         },
         {
           name: "Intelligence",
-          img: "https://cyberpunk2077.wiki.fextralife.com/file/Cyberpunk-2077/intelligence-attribute-cyberpunk-2077-wiki-guide.png",
+          img:
+            "https://cyberpunk2077.wiki.fextralife.com/file/Cyberpunk-2077/intelligence-attribute-cyberpunk-2077-wiki-guide.png",
           perkTrees: [
-            "Breach",
-            "Quickhacks",
-          ]
+            {
+              name: "Breach",
+              perks: [
+                {
+                  name: "perk1",
+                  imgUrl: "",
+                  maxValue: 2,
+                },
+                {
+                  name: "perk2",
+                  imgUrl: "",
+                  maxValue: 2,
+                },
+              ],
+            },
+            {
+              name: "Quickhacks",
+              perks: [
+                {
+                  name: "perk1",
+                  imgUrl: "",
+                  maxValue: 2,
+                },
+                {
+                  name: "perk2",
+                  imgUrl: "",
+                  maxValue: 2,
+                },
+              ],
+            },
+          ],
         },
         {
           name: "Cool",
-          img: "https://cyberpunk2077.wiki.fextralife.com/file/Cyberpunk-2077/cool-attribute-cyberpunk-2077-wiki-guide.png",
+          img:
+            "https://cyberpunk2077.wiki.fextralife.com/file/Cyberpunk-2077/cool-attribute-cyberpunk-2077-wiki-guide.png",
           perkTrees: [
-            "Stealth",
-            "Cold Blood",
-          ]
-        }
-      ]
-    }
+            {
+              name: "Stealth",
+              perks: [
+                {
+                  name: "perk1",
+                  imgUrl: "",
+                  maxValue: 2,
+                },
+                {
+                  name: "perk2",
+                  imgUrl: "",
+                  maxValue: 2,
+                },
+              ],
+            },
+            {
+              name: "Cold Blood",
+              perks: [
+                {
+                  name: "perk1",
+                  imgUrl: "",
+                  maxValue: 2,
+                },
+                {
+                  name: "perk2",
+                  imgUrl: "",
+                  maxValue: 2,
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    };
   },
-}
+};
 </script>
 
 <style>
