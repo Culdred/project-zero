@@ -1,12 +1,15 @@
 <template>
   <div id="app">
-    {{ name }}
-    <div v-for="(perk, idx) in perks" :key="idx">
-      <Perk
-        :name="perk.name"
-        :img-url="perk.imgUrl"
-        :max-value="perk.maxValue"
-      />
+    <div>
+      <strong>{{ name }}</strong>
+      <div v-for="(perk, idx) in perks" :key="idx">
+        <Perk
+          :name="perk.name"
+          :type="'perk'"
+          :img-url="perk.imgUrl"
+          :max-value="perk.maxValue"
+        />
+      </div>
     </div>
   </div>
 </template>
