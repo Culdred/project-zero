@@ -1,11 +1,13 @@
 <template>
   <div id="app">
     <div v-show="isVisible">
+      <strong>Main Page</strong>
+      
       <div v-for="(stat, idx) in statList" :key="idx">
-        <Perk :name="stat.name" :img-url="stat.img" max-value="20" />
 
+        <Perk :type="'stat'" :name="stat.name" :img-url="stat.img" max-value="20" />
         <div v-for="(perkTree, idx) in stat.perkTrees" :key="idx">
-          <button
+          <button id="perk-title"
             @click="
               isVisible = !isVisible;
               tree = perkTree.name;
@@ -21,8 +23,25 @@
     <div v-show="!isVisible">
       <PerksTree :name="tree" :perks="perks" />
     </div>
+    
+    <!-- TEST -->
+    <!-- <div v-if="tree !== ''">
+      <div v-show="!isVisible">
+        <PerksTree :name="tree" :perks="perks" />
+        -----------------------------------
+        <div v-for="(perk, idx) in perks" :key="idx">
+          <Perk
+            :name="perk.name"
+            :type="'perk'"
+            :img-url="perk.imgUrl"
+            :max-value="perk.maxValue"
+          />
+        </div>
 
-    <button
+      </div>
+    </div> -->
+
+    <button id="back-btn"
       v-show="!isVisible"
       @click="
         isVisible = !isVisible;
@@ -52,6 +71,7 @@ export default {
       statList: [
         {
           name: "Body",
+          info: "",
           img:
             "https://cyberpunk2077.wiki.fextralife.com/file/Cyberpunk-2077/body-attribute-cyberpunk-2077-wiki-guide.png",
           perkTrees: [
@@ -59,15 +79,40 @@ export default {
               name: "Athletics",
               perks: [
                 {
-                  name: "perk1",
+                  name: "Gladiator",
+                  requirement: "",
+                  effects: [],
                   imgUrl:
-                    "https://image.shutterstock.com/image-vector/three-gear-sign-simple-icon-260nw-417078436.jpg",
+                    "https://cyberpunk2077.wiki.fextralife.com/file/Cyberpunk-2077/gladiator-perk-cyberpunk-2077-wiki-guide.png",
                   maxValue: 2,
                 },
                 {
-                  name: "perk2",
-                  imgUrl: "",
+                  name: "Pack Mule",
+                  requirement: "",
+                  effects: [],
+                  imgUrl: "https://cyberpunk2077.wiki.fextralife.com/file/Cyberpunk-2077/pack-mula-perk-cyberpunk-2077-wiki-guide.png",
+                  maxValue: 1,
+                },
+                {
+                  name: "Epimorphisis",
+                  requirement: "",
+                  effects: [],
+                  imgUrl: "https://cyberpunk2077.wiki.fextralife.com/file/Cyberpunk-2077/edimorphosis-perk-cyberpunk-2077-wiki-guide.png",
                   maxValue: 3,
+                },
+                {
+                  name: "Like a Butterfly",
+                  requirement: "",
+                  effects: [],
+                  imgUrl: "https://cyberpunk2077.wiki.fextralife.com/file/Cyberpunk-2077/like-a-butterfly-perk-cyberpunk-2077-wiki-guide.png",
+                  maxValue: 1,
+                },
+                {
+                  name: "Dog of War",
+                  requirement: "",
+                  effects: [],
+                  imgUrl: "https://cyberpunk2077.wiki.fextralife.com/file/Cyberpunk-2077/dog-of-war-perk-cyberpunk-2077-wiki-guide.png",
+                  maxValue: 2,
                 },
               ],
             },
@@ -75,14 +120,18 @@ export default {
               name: "Annihilation",
               perks: [
                 {
-                  name: "perk1",
-                  imgUrl: "",
+                  name: "Pump it, louder!",
+                  requirement: "",
+                  effects: [],
+                  imgUrl: "https://cyberpunk2077.wiki.fextralife.com/file/Cyberpunk-2077/pump-it-louder-perk-cyberpunk-2077-wiki-guide.png",
                   maxValue: 2,
                 },
                 {
-                  name: "perk2",
-                  imgUrl: "",
-                  maxValue: 2,
+                  name: "Momentum Shift",
+                  requirement: "",
+                  effects: [],
+                  imgUrl: "https://cyberpunk2077.wiki.fextralife.com/file/Cyberpunk-2077/momentum-shift-perk-cyberpunk-2077-wiki-guide.png",
+                  maxValue: 3,
                 },
               ],
             },
@@ -90,14 +139,18 @@ export default {
               name: "Street Brawler",
               perks: [
                 {
-                  name: "perk1",
-                  imgUrl: "",
-                  maxValue: 2,
+                  name: "Crushing Blows",
+                  requirement: "",
+                  effects: [],
+                  imgUrl: "https://cyberpunk2077.wiki.fextralife.com/file/Cyberpunk-2077/crushing-blows-perk-cyberpunk-2077-wiki-guide.png",
+                  maxValue: 3,
                 },
                 {
-                  name: "perk2",
-                  imgUrl: "",
-                  maxValue: 2,
+                  name: "Opportune Strike",
+                  requirement: "",
+                  effects: [],
+                  imgUrl: "https://cyberpunk2077.wiki.fextralife.com/file/Cyberpunk-2077/opportune-strike-perk-cyberpunk-2077-wiki-guide.png",
+                  maxValue: 1,
                 },
               ],
             },
@@ -105,6 +158,7 @@ export default {
         },
         {
           name: "Reflexes",
+          info: "",
           img:
             "https://cyberpunk2077.wiki.fextralife.com/file/Cyberpunk-2077/reflexes-attribute-cyberpunk-2077-wiki-guide.png",
           perkTrees: [
@@ -113,11 +167,15 @@ export default {
               perks: [
                 {
                   name: "perk1",
+                  requirement: "",
+                  effects: [],
                   imgUrl: "",
                   maxValue: 2,
                 },
                 {
                   name: "perk2",
+                  requirement: "",
+                  effects: [],
                   imgUrl: "",
                   maxValue: 2,
                 },
@@ -128,11 +186,15 @@ export default {
               perks: [
                 {
                   name: "perk1",
+                  requirement: "",
+                  effects: [],
                   imgUrl: "",
                   maxValue: 2,
                 },
                 {
                   name: "perk2",
+                  requirement: "",
+                  effects: [],
                   imgUrl: "",
                   maxValue: 2,
                 },
@@ -143,11 +205,15 @@ export default {
               perks: [
                 {
                   name: "perk1",
+                  requirement: "",
+                  effects: [],
                   imgUrl: "",
                   maxValue: 2,
                 },
                 {
                   name: "perk2",
+                  requirement: "",
+                  effects: [],
                   imgUrl: "",
                   maxValue: 2,
                 },
@@ -157,6 +223,7 @@ export default {
         },
         {
           name: "Technical Ability",
+          info: "",
           img:
             "https://cyberpunk2077.wiki.fextralife.com/file/Cyberpunk-2077/technical-ability-attribute-cyberpunk-2077-wiki-guide.png",
           perkTrees: [
@@ -165,11 +232,15 @@ export default {
               perks: [
                 {
                   name: "perk1",
+                  requirement: "",
+                  effects: [],
                   imgUrl: "",
                   maxValue: 2,
                 },
                 {
                   name: "perk2",
+                  requirement: "",
+                  effects: [],
                   imgUrl: "",
                   maxValue: 2,
                 },
@@ -180,11 +251,15 @@ export default {
               perks: [
                 {
                   name: "perk1",
+                  requirement: "",
+                  effects: [],
                   imgUrl: "",
                   maxValue: 2,
                 },
                 {
                   name: "perk2",
+                  requirement: "",
+                  effects: [],
                   imgUrl: "",
                   maxValue: 2,
                 },
@@ -194,20 +269,25 @@ export default {
         },
         {
           name: "Intelligence",
+          info: "",
           img:
             "https://cyberpunk2077.wiki.fextralife.com/file/Cyberpunk-2077/intelligence-attribute-cyberpunk-2077-wiki-guide.png",
           perkTrees: [
             {
-              name: "Breach",
+              name: "Breach Protocol",
               perks: [
                 {
-                  name: "perk1",
-                  imgUrl: "",
-                  maxValue: 2,
+                  name: "Total Recall",
+                  requirement: "",
+                  effects: [],
+                  imgUrl: "https://cyberpunk2077.wiki.fextralife.com/file/Cyberpunk-2077/total-recall-perk-cyberpunk-2077-wiki-guide.png",
+                  maxValue: 1,
                 },
                 {
-                  name: "perk2",
-                  imgUrl: "",
+                  name: "Datamine Mastermind",
+                  requirement: "",
+                  effects: [],
+                  imgUrl: "https://cyberpunk2077.wiki.fextralife.com/file/Cyberpunk-2077/datamine-mastermind-perk-cyberpunk-2077-wiki-guide.png",
                   maxValue: 2,
                 },
               ],
@@ -216,14 +296,18 @@ export default {
               name: "Quickhacks",
               perks: [
                 {
-                  name: "perk1",
-                  imgUrl: "",
-                  maxValue: 2,
+                  name: "Critical Error",
+                  requirement: "",
+                  effects: [],
+                  imgUrl: "https://cyberpunk2077.wiki.fextralife.com/file/Cyberpunk-2077/critical-error-perk-cyberpunk-2077-wiki-guide.png",
+                  maxValue: 1,
                 },
                 {
-                  name: "perk2",
-                  imgUrl: "",
-                  maxValue: 2,
+                  name: "Plague",
+                  requirement: "",
+                  effects: [],
+                  imgUrl: "https://cyberpunk2077.wiki.fextralife.com/file/Cyberpunk-2077/plauge-perk-cyberpunk-2077-wiki-guide.png",
+                  maxValue: 3,
                 },
               ],
             },
@@ -231,6 +315,7 @@ export default {
         },
         {
           name: "Cool",
+          info: "",
           img:
             "https://cyberpunk2077.wiki.fextralife.com/file/Cyberpunk-2077/cool-attribute-cyberpunk-2077-wiki-guide.png",
           perkTrees: [
@@ -239,11 +324,15 @@ export default {
               perks: [
                 {
                   name: "perk1",
+                  requirement: "",
+                  effects: [],
                   imgUrl: "",
                   maxValue: 2,
                 },
                 {
                   name: "perk2",
+                  requirement: "",
+                  effects: [],
                   imgUrl: "",
                   maxValue: 2,
                 },
@@ -254,11 +343,15 @@ export default {
               perks: [
                 {
                   name: "perk1",
+                  requirement: "",
+                  effects: [],
                   imgUrl: "",
                   maxValue: 2,
                 },
                 {
                   name: "perk2",
+                  requirement: "",
+                  effects: [],
                   imgUrl: "",
                   maxValue: 2,
                 },
@@ -273,12 +366,40 @@ export default {
 </script>
 
 <style>
+img {
+  height: 70px;
+  width: 70px;
+}
+.container {
+  display: flex;
+}
+#perk-title {
+  width: 122px;
+}
+#perk-title:hover {
+  background: midnightblue;
+  color: rgb(10, 235, 216);
+  border-radius: 5px;
+}
+#perk {
+  background: midnightblue;
+  color: yellow;
+  border-radius: 5px;
+}
+#stat {
+  background: midnightblue;
+  color: rgb(10, 235, 216);
+  border-radius: 5px;
+}
+#back-btn {
+  width: 115px;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin-top: 30px;
 }
 </style>
