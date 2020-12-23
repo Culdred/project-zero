@@ -1,6 +1,6 @@
 <template>
     <div>
-        <button @mousedown.left="addValue()" @mousedown.right="subtractValue()" @contextmenu.prevent="">
+        <button :id="type" @mousedown.left="addValue()" @mousedown.right="subtractValue()" @contextmenu.prevent="">
             <img :src="imgUrl">
             {{ value }} / {{ maxValue }}
             <br>
@@ -13,6 +13,7 @@
 export default {
     props: {
         name: String,
+        type: String,
         maxValue: Number,
         imgUrl: String,
     },
@@ -37,8 +38,4 @@ export default {
 </script>
 
 <style>
-    img {
-        height: 50px;
-        width: 50px;
-    }
 </style>
