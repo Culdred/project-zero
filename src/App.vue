@@ -57,8 +57,6 @@
         </div>
       </div>
     </div>
-
-    {{ statistic }}
   </div>
 </template>
 
