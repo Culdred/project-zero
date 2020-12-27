@@ -14,7 +14,7 @@
     <div v-show="isVisible">
       <strong>Main Page</strong>
 
-      <div v-for="(stat, idx) in statList" :key="idx">
+      <div v-for="(stat, statIdx) in statList" :key="statIdx">
         <Perk
           @changeValue="stat.value = $event"
           :type="'stat'"
@@ -23,14 +23,17 @@
           :max-value="20"
           :value="stat.value"
         />
-        <div v-for="(perkTree, idx) in stat.perkTrees" :key="idx">
+        <div
+          v-for="(perkTree, perkTreeIdx) in stat.perkTrees"
+          :key="perkTreeIdx"
+        >
           <button
             id="perk-title"
             @click="
               isVisible = !isVisible;
               tree = perkTree.name;
-              statistic = stat;
-              perkIndex = idx;
+              perkTreeIndex = perkTreeIdx;
+              statIndex = statIdx;
             "
           >
             {{ perkTree.name }}
@@ -43,7 +46,8 @@
       <div v-show="!isVisible">
         <strong>{{ tree }}</strong>
         <div
-          v-for="(perk, idx) in statistic.perkTrees[perkIndex].perks"
+          v-for="(perk, idx) in statList[statIndex].perkTrees[perkTreeIndex]
+            .perks"
           :key="idx"
         >
           <Perk
@@ -72,8 +76,8 @@ export default {
     return {
       isVisible: true,
       tree: "",
-      statistic: "",
-      perkIndex: 0,
+      statIndex: 0,
+      perkTreeIndex: 0,
       statList: [
         {
           name: "Body",
@@ -128,6 +132,60 @@ export default {
                   imgUrl:
                     "https://cyberpunk2077.wiki.fextralife.com/file/Cyberpunk-2077/dog-of-war-perk-cyberpunk-2077-wiki-guide.png",
                   maxValue: 2,
+                  value: 0,
+                },
+                {
+                  name: "Marathoner",
+                  requirement: "",
+                  effects: [],
+                  imgUrl:
+                    "https://cyberpunk2077.wiki.fextralife.com/file/Cyberpunk-2077/marathoner-perk-cyberpunk-2077-wiki-guide.png",
+                  maxValue: 1,
+                  value: 0,
+                },
+                {
+                  name: "Multitasker",
+                  requirement: "",
+                  effects: [],
+                  imgUrl:
+                    "https://cyberpunk2077.wiki.fextralife.com/file/Cyberpunk-2077/multitasker-perk-cyberpunk-2077-wiki-guide.png",
+                  maxValue: 1,
+                  value: 0,
+                },
+                {
+                  name: "Steel and Chrome",
+                  requirement: "",
+                  effects: [],
+                  imgUrl:
+                    "https://cyberpunk2077.wiki.fextralife.com/file/Cyberpunk-2077/steel-and-chrome-perk-cyberpunk-2077-wiki-guide.png",
+                  maxValue: 2,
+                  value: 0,
+                },
+                {
+                  name: "Divided Attention",
+                  requirement: "",
+                  effects: [],
+                  imgUrl:
+                    "https://cyberpunk2077.wiki.fextralife.com/file/Cyberpunk-2077/divided-attention-perk-cyberpunk-2077-wiki-guide.png",
+                  maxValue: 1,
+                  value: 0,
+                },
+                {
+                  name: "Invincible",
+                  requirement: "",
+                  effects: [],
+                  imgUrl:
+                    "https://cyberpunk2077.wiki.fextralife.com/file/Cyberpunk-2077/invincible-perk-cyberpunk-2077-wiki-guide.png",
+                  maxValue: 3,
+                  value: 0,
+                },
+                {
+                  name: "Soft on your feet",
+                  requirement: "",
+                  effects: [],
+                  imgUrl:
+                    "https://cyberpunk2077.wiki.fextralife.com/file/Cyberpunk-2077/soft-on-your-feet-perk-cyberpunk-2077-wiki-guide.png",
+                  maxValue: 3,
                   value: 0,
                 },
               ],
@@ -217,6 +275,7 @@ export default {
                   effects: [],
                   imgUrl: "",
                   maxValue: 2,
+                  value: 0,
                 },
                 {
                   name: "perk2",
@@ -224,6 +283,7 @@ export default {
                   effects: [],
                   imgUrl: "",
                   maxValue: 2,
+                  value: 0,
                 },
               ],
             },
