@@ -1,13 +1,13 @@
 <template>
   <div>
     <button
-      :id="type"
-      @mousedown.left="addValue()"
-      @mousedown.right="subtractValue()"
+      :class="type"
+      @mousedown.left="addValue"
+      @mousedown.right="subtractValue"
       @contextmenu.prevent=""
     >
       <img :src="imgUrl" />
-      {{ localValue }} / {{ maxValue }}
+      {{ value }} / {{ maxValue }}
       <br />
       {{ name }}
     </button>
@@ -17,28 +17,36 @@
 <script>
 export default {
   props: {
-    name: String,
-    type: String,
-    maxValue: Number,
-    imgUrl: String,
-    value: Number,
-  },
-  data: function() {
-    return {
-      localValue: this.value,
-    };
+    name: {
+      type: String,
+      default: "",
+    },
+    type: {
+      type: String,
+      deafult: "",
+    },
+    maxValue: {
+      type: Number,
+      default: 0,
+    },
+    imgUrl: {
+      type: String,
+      default: "",
+    },
+    value: {
+      type: Number,
+      default: 0,
+    },
   },
   methods: {
     addValue() {
-      if (this.localValue < this.maxValue) {
-        this.localValue++;
-        this.$emit("changeValue", this.localValue);
+      if (this.value < this.maxValue) {
+        this.$emit("input", this.value + 1);
       }
     },
     subtractValue() {
-      if (this.localValue > 0) {
-        this.localValue--;
-        this.$emit("changeValue", this.localValue);
+      if (this.value > 0) {
+        this.$emit("input", this.value - 1);
       }
     },
   },

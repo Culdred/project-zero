@@ -1,37 +1,32 @@
 <template>
   <div id="app">
     <button
-      id="back-btn"
-      v-show="!isVisible"
-      @click="
-        isVisible = !isVisible;
-        tree = '';
-      "
+      class="back-btn"
+      v-if="!isChildPage"
+      @click="isChildPage = !isChildPage"
     >
       Back
     </button>
 
-    <div v-show="isVisible">
+    <div v-if="isChildPage">
       <strong>Main Page</strong>
 
       <div v-for="(stat, statIdx) in statList" :key="statIdx">
         <Perk
-          @changeValue="stat.value = $event"
-          :type="'stat'"
+          type="stat"
           :name="stat.name"
           :img-url="stat.img"
           :max-value="20"
-          :value="stat.value"
+          v-model="stat.value"
         />
         <div
           v-for="(perkTree, perkTreeIdx) in stat.perkTrees"
           :key="perkTreeIdx"
         >
           <button
-            id="perk-title"
+            class="perk-title"
             @click="
-              isVisible = !isVisible;
-              tree = perkTree.name;
+              isChildPage = !isChildPage;
               perkTreeIndex = perkTreeIdx;
               statIndex = statIdx;
             "
@@ -42,23 +37,20 @@
       </div>
     </div>
 
-    <div v-if="tree !== ''">
-      <div v-show="!isVisible">
-        <strong>{{ tree }}</strong>
-        <div
-          v-for="(perk, idx) in statList[statIndex].perkTrees[perkTreeIndex]
-            .perks"
-          :key="idx"
-        >
-          <Perk
-            @changeValue="perk.value = $event"
-            :name="perk.name"
-            :type="'perk'"
-            :img-url="perk.imgUrl"
-            :max-value="perk.maxValue"
-            :value="perk.value"
-          />
-        </div>
+    <div v-if="!isChildPage">
+      <strong>{{ statList[statIndex].perkTrees[perkTreeIndex].name }}</strong>
+      <div
+        v-for="(perk, idx) in statList[statIndex].perkTrees[perkTreeIndex]
+          .perks"
+        :key="idx"
+      >
+        <Perk
+          :name="perk.name"
+          :type="'perk'"
+          :img-url="perk.imgUrl"
+          :max-value="perk.maxValue"
+          v-model="perk.value"
+        />
       </div>
     </div>
   </div>
@@ -74,8 +66,7 @@ export default {
   },
   data: function() {
     return {
-      isVisible: true,
-      tree: "",
+      isChildPage: true,
       statIndex: 0,
       perkTreeIndex: 0,
       statList: [
@@ -484,25 +475,25 @@ img {
 .container {
   display: flex;
 }
-#perk-title {
+.perk-title {
   width: 122px;
 }
-#perk-title:hover {
+.perk-title:hover {
   background: midnightblue;
   color: rgb(10, 235, 216);
   border-radius: 5px;
 }
-#perk {
+.perk {
   background: midnightblue;
   color: yellow;
   border-radius: 5px;
 }
-#stat {
+.stat {
   background: midnightblue;
   color: rgb(10, 235, 216);
   border-radius: 5px;
 }
-#back-btn {
+.back-btn {
   width: 115px;
 }
 #app {
