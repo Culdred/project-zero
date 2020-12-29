@@ -2,6 +2,7 @@
 
 todo:
 
+- use localStorage
 - implement vuex
 - divide App.vue in components
 
